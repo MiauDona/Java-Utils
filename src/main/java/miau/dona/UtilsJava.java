@@ -174,19 +174,32 @@ public class UtilsJava {
         
         System.out.println("\n}");
     }
-    
+
+    /**
+     * Muestra la diagonal principal desde la esquina izquierda
+     * @param matriz matriz a mostrar
+     */
     public static void mostrarMatrizDiagonalIzquierdaADerecha(int[][] matriz) {
         for (int i = 0; i < matriz[0].length; i++) {
             System.out.print(matriz[i][i] + " ");
         }
     }
 
+    /**
+     * Muestra la diagonal principal desde la esquina derecha
+     * @param matriz matriz a mostrar
+     */
     public static void mostrarMatrizDiagonalDerechaAIzquierda(int[][] matriz) {
         for (int i = 0; i < matriz[0].length; i++) {
             System.out.print(matriz[i][matriz[i].length-1-i] + " "); //?? nose si funciona
         }
     }
 
+    /**
+     * Muestra la columna indicada
+     * @param matriz matriz de la que se va a mostrar la columna
+     * @param columna columna a mostrar
+     */
     public static void mostrarMatrizColumna (int[][] matriz, int columna) {
         for (int i = 0; i < matriz[0].length; i++) {
             System.out.println(matriz[i][columna-1] + " ");
@@ -195,8 +208,8 @@ public class UtilsJava {
 
     /**
      * Muestra la fila que quieras de una matriz
-     * @param matriz 
-     * @param fila
+     * @param matriz matriz de la que se va a mostrar la columna
+     * @param fila fila a mostrar
      */
     public static void mostrarMatrizFila (int[][] matriz, int fila) {
         for (int i = 0; i < matriz[fila-1].length; i++) {
