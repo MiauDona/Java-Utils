@@ -1,4 +1,4 @@
-package miau.dona;
+package miau.dona.utils;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -248,5 +248,52 @@ public class UtilsJava {
         }
         
         return matrizRotada;
+    }
+
+
+    /**
+     * Crea una submatriz a partir de una matriz
+     * @param filaArribaIzq Fila de la esquina de arriba a la izquierda
+     * @param columnaArribaIzq Columna de la esquina de arriba a la izquierda
+     * @param filaAbajoDerecha Fila de la esquina de abajo a la derehca
+     * @param columnaAbajoDerecha Columna de la esquina de abajo a la derecha
+     * @param matriz Matriz de la que se va a sacar la submatriz
+     * @return Submatriz de las coordenadas
+     */
+    public static int[][] crearSubmatrizDeMatriz(int filaArribaIzq, int columnaArribaIzq, int filaAbajoDerecha, int columnaAbajoDerecha, int[][] matriz) {
+        if (filaArribaIzq > matriz.length || filaArribaIzq > filaAbajoDerecha || filaArribaIzq < 0) {
+            System.out.println("Fila arriba derecha mala");
+            return new int[][]{};
+        }
+        if (columnaArribaIzq > matriz[0].length || columnaArribaIzq > columnaAbajoDerecha || columnaArribaIzq < 0) {
+            System.out.println("Columna arriba izquierda mala");
+            return new int[][]{};
+        }
+        if (filaAbajoDerecha > matriz.length || filaAbajoDerecha < filaArribaIzq || filaAbajoDerecha < 0) {
+            System.out.println("Fila abajo derecha mala");
+            return new int[][]{};
+        }
+        if (columnaAbajoDerecha > matriz[0].length || columnaAbajoDerecha < columnaArribaIzq || columnaAbajoDerecha < 0) {
+            System.out.println("Columna abajo derecha mala");
+            return new int[][]{};
+        }
+
+        int tamanofila = filaAbajoDerecha - filaArribaIzq;
+        int tamanocolumna = columnaAbajoDerecha-columnaArribaIzq;
+        int[][] nuevoArray = new int[tamanofila+1][tamanocolumna+1];
+
+
+        int fila = 0;
+        int columna = 0;
+        for (int i = filaArribaIzq; i <= filaAbajoDerecha; i++) {
+            for (int j = columnaArribaIzq; j <= columnaAbajoDerecha; j++) {
+                nuevoArray[fila][columna] = matriz[i][j];
+                columna++;
+            }
+            columna = 0;
+            fila++;
+        }
+
+        return nuevoArray;
     }
 }
