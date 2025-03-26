@@ -1,4 +1,4 @@
-package miau.dona.utils;
+package miau.dona;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -296,4 +296,183 @@ public class UtilsJava {
 
         return nuevoArray;
     }
+
+    /**
+     * Comprueba si un número es capicúa
+     * @param number Número que se comprueba si es capicúa
+     * @return Devuelve true si es capicúa
+     */
+    public static boolean isCapicua(int number) {
+        // If the number is less than 0 it's not capicua
+        if (number < 0) {
+            return false;
+
+            // If the number has less than 2 digits it's not capicua, and 10 it's not capicua so it's not even tried
+        } else if (number < 11) {
+            return true;
+        }
+
+        // If the digit isn't the same as it's correspondent digit
+        char[] charNumber = String.valueOf(number).toCharArray();
+
+        for (int i = 0; i < charNumber.length; i++) {
+            if (charNumber[i] != charNumber[charNumber.length - 1 - i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Comprueba si un número es primo
+     * @param number Numero a comprobar si es primo
+     * @return Devuelve true si es primo
+     */
+    public static boolean isPrime(int number) {
+        for (int i = 2; i < number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Devuelve la longitud de un número
+    public static int digits(int number) {
+        return String.valueOf(number).length();
+    }
+
+    /**
+     * Dar la vuelta a un número
+     * @param number Número que se le da la vuelta
+     * @return Número volteado
+     */
+    public static int flip(int number) {
+        char[] charNumber = String.valueOf(number).toCharArray();
+        char[] charNumberInvertido = new char[charNumber.length];
+
+        for (int i = 0; i < charNumber.length; i++) {
+            charNumberInvertido[i] = charNumber[charNumber.length - 1 - i];
+        }
+
+        String stringNumberInvertido = new String(charNumberInvertido);
+
+        return Integer.parseInt(stringNumberInvertido);
+    }
+
+    /**
+     * Devuelve el dígito que está en una posición de una palabra
+     * @param number Número
+     * @param position Posición que se va a comprobar
+     * @return Dígito de la posición
+     */
+    public static int digitN(int number, int position) {
+        return String.valueOf(number).charAt(position);
+    }
+
+    /**
+     * Mira la posición de un dígito dentro de un número
+     * @param number Número completo que se va a comprobar
+     * @param occurrence Dígito dentro del número
+     * @return Posición de un digito
+     */
+    public static int digitPosition(int number, int occurrence) {
+        char[] charNumber = String.valueOf(number).toCharArray();
+
+        for (int i = 0; i < charNumber.length; i++) {
+            if (charNumber[i] == charNumber[occurrence]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Elimina dígitos de un número desde atrás
+     * @param number Número del que se van a eliminar dígitos
+     * @param times Veces que se van a eliminar los dígitos
+     * @return Número con los digitos ya eliminados
+     */
+    public static int removeByBehind(int number, int times) {
+        if (times < 1) {
+            return number;
+        }
+
+        char[] charNumber = String.valueOf(number).toCharArray();
+        int position;
+
+        for (int i = 0; i < times; i++) {
+            position = charNumber.length - 1 - i;
+            charNumber[position] = 'a';
+        }
+
+        String stringNumberRemoved = "";
+
+        for (char c : charNumber) {
+            if (c != 'a') {
+                stringNumberRemoved = stringNumberRemoved + c;
+            }
+        }
+        return Integer.parseInt(stringNumberRemoved);
+    }
+
+    /**
+     * Añadir un numero atrás
+     * @param number Numero al que se le va a añadir algo
+     * @param digit Digito que se va a añadir
+     * @return Numero con el digito añadido
+     */
+    public static int pasteByBack(int number, int digit) {
+        if (digit < 1 || digit > 9) {
+            return number;
+        }
+
+        char[] charNumber = new char[String.valueOf(number).length()+1];
+
+        for (int i = 0; i < charNumber.length-1; i++) {
+            charNumber[i] = String.valueOf(number).charAt(i);
+        }
+
+        charNumber[charNumber.length-1] = Integer.toString(digit).charAt(0);
+        return Integer.parseInt(String.valueOf(charNumber));
+    }
+
+    /**
+     * Corta un trozo de números entre 2 dígitos
+     * @param number Número a cortar
+     * @param start Dígito por el que se empieza a cortar
+     * @param end Dígito en el que acaba de cortar
+     * @return Número cortado
+     */
+    public static int numberSnippet(int number, int start, int end) {
+        char[] charNumber = String.valueOf(number).toCharArray();
+
+        if (start > end || end > charNumber.length || start < 0 || end < 0) {
+            return number;
+        }
+
+        String snippetNumber = "";
+
+        for (int i = start; i < end; i++) {
+            snippetNumber += charNumber[i];
+        }
+
+        return Integer.parseInt(snippetNumber);
+    }
+
+    /**
+     * Junta 2 números
+     * @param number1 Número que va a estar al principio
+     * @param number2 Número que va a estar al final
+     * @return Número completo que junta ambos números
+     */
+    public static int numbersTogether(int number1, int number2) {
+        String numbers = String.valueOf(number1) + String.valueOf(number2);
+
+        return Integer.parseInt(numbers);
+    }
+
+
 }
