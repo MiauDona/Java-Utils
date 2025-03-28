@@ -64,28 +64,6 @@ public class UtilsJava {
     }
 
     /**
-     * Comprueba si el numero introducido es primo
-     *
-     * @param numeroIntroducido Numero Int a comprobar que sea primo
-     * @return Devuelve un boolean, true si es primo y si no lo es, false
-     */
-    public static boolean esNumeroPrimo(int numeroIntroducido) {
-        boolean esPrimo = true;
-
-        if (numeroIntroducido == 0) {
-            return false;
-        }
-        for (int i = numeroIntroducido - 1; i > 1; i--) {
-            if (numeroIntroducido % i == 0) {
-                esPrimo = false;
-                break;
-            }
-        }
-
-        return esPrimo;
-    }
-
-    /**
      * Muestra el array entero de int
      *
      * @param array Array de Int para mostrar
@@ -260,7 +238,7 @@ public class UtilsJava {
      * @param matriz Matriz a comprobar
      * @return la matriz rotada
      */
-    public static int[][] rotarMatrizValores(int matriz[][]) {
+    public static int[][] rotarMatriz(int matriz[][]) {
         int[][] matrizRotada = new int[matriz[0].length][matriz.length];
 
         for (int i = 0; i < matriz.length; i++) {
@@ -326,7 +304,7 @@ public class UtilsJava {
      * @param number Número que se comprueba si es capicúa
      * @return Devuelve true si es capicúa
      */
-    public static boolean isCapicua(int number) {
+    public static boolean esCapicua(int number) {
         // If the number is less than 0 it's not capicua
         if (number < 0) {
             return false;
@@ -354,7 +332,11 @@ public class UtilsJava {
      * @param number Numero a comprobar si es primo
      * @return Devuelve true si es primo
      */
-    public static boolean isPrime(int number) {
+    public static boolean esPrimo(int number) {
+        if (number == 0) {
+            return false;
+        }
+
         for (int i = 2; i < number; i++) {
             if (number % i == 0) {
                 return false;
@@ -424,7 +406,7 @@ public class UtilsJava {
      * @param times  Veces que se van a eliminar los dígitos
      * @return Número con los digitos ya eliminados
      */
-    public static int removeByBehind(int number, int times) {
+    public static int eliminarDigito(int number, int times) {
         if (times < 1) {
             return number;
         }
@@ -454,7 +436,7 @@ public class UtilsJava {
      * @param digit  Digito que se va a añadir
      * @return Numero con el digito añadido
      */
-    public static int pasteByBack(int number, int digit) {
+    public static int anadirDigito(int number, int digit) {
         if (digit < 1 || digit > 9) {
             return number;
         }
@@ -477,10 +459,10 @@ public class UtilsJava {
      * @param end    Dígito en el que acaba de cortar
      * @return Número cortado
      */
-    public static int numberSnippet(int number, int start, int end) {
+    public static int cortarNumero(int number, int start, int end) {
         char[] charNumber = String.valueOf(number).toCharArray();
 
-        if (start > end || end > charNumber.length || start < 0 || end < 0) {
+        if (start > end || end > charNumber.length || start < 0) {
             return number;
         }
 
@@ -500,7 +482,7 @@ public class UtilsJava {
      * @param number2 Número que va a estar al final
      * @return Número completo que junta ambos números
      */
-    public static int numbersTogether(int number1, int number2) {
+    public static int juntarNumeros(int number1, int number2) {
         String numbers = String.valueOf(number1) + String.valueOf(number2);
 
         return Integer.parseInt(numbers);
@@ -525,7 +507,6 @@ public class UtilsJava {
         }
         return false;
     }
-
 
     /**
      * Printea la serie de fibonacci tantos numeros como uno pida
@@ -676,7 +657,7 @@ public class UtilsJava {
         return arrayShell;
     }
 
-    // Encuentra la suma contigua más grande de números teniendo en cuenta que hay 
+    // Encuentra la suma contigua más grande de números teniendo en cuenta que hay
     // números positivos y negativos. Muestra la lista de números contiguos dentro de la lista
     public static int kadaneSumaContigua(int[] array) {
         int sumaActual = 0;
@@ -709,9 +690,29 @@ public class UtilsJava {
         for (int i = 0; i <= fin-inicio; i++) {
             numerosSumados[i] = array[inicio+i];
         }
-        
-        // mostrarArrayInts(numerosSumados);
+
+        mostrarArrayInts(numerosSumados);
 
         return maxSuma;
+    }
+
+    /**
+     * Une dos arrays
+     * @param array1 Array que va a estar al principio
+     * @param array2 Array que va a estar al final
+     * @return Array con los dos arrays unidos
+     */
+    public static int[] unirArraysInt(int[] array1, int[] array2) {
+        int[] arrayResultado = new int[array1.length+array2.length];
+
+        for (int i = 0; i < arrayResultado.length; i++) {
+            if (i < array1.length) {
+                arrayResultado[i] = array1[i];
+            } else {
+                arrayResultado[i] = array2[i-array1.length];
+            }
+        }
+
+        return arrayResultado;
     }
 }
